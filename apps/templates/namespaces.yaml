@@ -1,0 +1,38 @@
+{{- if and (.Values.helmGuestBook) (.Values.helmGuestBook.enable) (.Values.helmGuestBook.namespace.enable) -}}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.helmGuestBook.namespace.name }} 
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+{{- end -}}
+
+{{- if and (.Values.helmHooks) (.Values.helmHooks.enable) (.Values.helmHooks.namespace.enable) -}}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helm-hooks
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+{{- end -}}
+
+{{- if and (.Values.helmGuestBookKustomize) (.Values.helmGuestBookKustomize.enable) (.Values.helmGuestBookKustomize.namespace.enable) -}}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kustomize-guestbook
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+{{- end -}}
+
+{{- if and (.Values.syncWaves) (.Values.syncWaves.enable) (.Values.syncWaves.namespace.enable) -}}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sync-waves
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+{{- end -}}
