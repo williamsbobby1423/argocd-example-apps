@@ -10,7 +10,7 @@ spec:
   destination:
     namespace: {{ .Values.syncWaves.namespace.name | default "sync-waves" }}
     server: {{ .Values.spec.destination.server }}
-  project: {{ .Values.syncWaves.project | default "default" }}
+  project: {{ .Values.syncWaves.project.name | default "default" }}
   source:
     path: sync-waves
     repoURL: {{ .Values.spec.source.repoURL }}
