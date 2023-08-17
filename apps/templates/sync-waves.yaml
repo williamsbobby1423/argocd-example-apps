@@ -17,5 +17,5 @@ spec:
     targetRevision: {{ .Values.spec.source.targetRevision }}
     helm:
       values: | 
-        {{ toJson .Values | toString | indent 8 }}
+        {{ toJson .Values.syncWaves| toString | indent 8 }}
 {{- end -}}
