@@ -10,7 +10,7 @@ spec:
   destination:
     namespace: {{ .Values.helmGuestBookKustomize.namespace.name | default "kustomize-guestbook" }}
     server: {{ .Values.spec.destination.server }}
-  project: {{ .Values.helmGuestBookKustomize.project | default "default" }}
+  project: {{ .Values.helmGuestBookKustomize.project.name | default "default" }}
   source:
     path: kustomize-guestbook
     repoURL: {{ .Values.spec.source.repoURL }}

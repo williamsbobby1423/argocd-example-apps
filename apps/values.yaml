@@ -6,25 +6,29 @@ spec:
     targetRevision: HEAD
   helmGuestBook:
     enable: false
-    project: default
+    project: 
+      name: default
     namespace: 
       create: false
       name: helm-guestbook
   helmHooks:
     enable: false
-    project: default
+    project: 
+      name: default
     namespace: 
       create: false
       name: helm-hooks
   helmGuestBookKustomize:
     enable: false
-    project: default
+    project: 
+      name: default
     namespace: 
       create: false
       name: kustomize-guestbook
   syncWaves:
     enable: false
-    project: default
+    project: 
+      name: default
     namespace: 
       create: false
       name: sync-waves

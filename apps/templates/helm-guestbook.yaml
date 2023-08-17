@@ -10,7 +10,7 @@ spec:
   destination:
     namespace: {{ .Values.helmGuestBook.namespace.name | default "helm-guestbook" }}
     server: {{ .Values.spec.destination.server }}
-  project: {{ .Values.helmGuestBook.project | default "default" }}
+  project: {{ .Values.helmGuestBook.project.name | default "default" }}
   source:
     path: helm-guestbook
     repoURL: {{ .Values.spec.source.repoURL }}
