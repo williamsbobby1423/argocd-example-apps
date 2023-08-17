@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: helm-hooks
-  namespace: {{ .Values.argoNamespace | default "argocd" }}
+  namespace: {{ .Values.helmHooks.namespace.name | default "argocd" }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
@@ -15,4 +15,7 @@ spec:
     path: helm-hooks
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
+    helm:
+      values: | 
+        {{ toJson .Values | toString | indent 8 }}
 {{- end -}}
