@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  namespace: app
+  labels:
+    app: demo
+spec:
+  selector:
+    matchLabels:
+      app: demo
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: demo
+    spec:
+      serviceAccountName: app
+      containers:
+        - name: app
+          image: nginx
+          volumeMounts:
+            - name: 'vault-user-creds'
+              mountPath: '/mnt/secrets-store'
+              readOnly: true
+            - name: 'dynamic-aws-credentials'
+              mountPath: '/mnt/aws-creds'
+              readOnly: true
+      volumes:
+        - name: vault-user-creds
+          csi:
+            driver: 'secrets-store.csi.k8s.io'
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: 'vault-user-creds'
+        - name: dynamic-aws-credentials
+          csi:
+            driver: 'secrets-store.csi.k8s.io'
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: 'dynamic-aws-credentials'

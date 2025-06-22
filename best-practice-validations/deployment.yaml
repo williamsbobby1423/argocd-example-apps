@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: best-practice-validation
+  labels:
+    app: validation
+spec:
+  selector:
+    matchLabels:
+      app: validation
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: validation
+    spec:
+      containers:
+        - name: app
+          image: nginx
+          volumeMounts:
+            - mountPath: "/usr/share/nginx/html"
+              name: test-encryption-storage
+      volumes:
+        - name: test-encryption-storage
+          persistentVolumeClaim:
+            claimName: test-encryption
